@@ -10,7 +10,7 @@
   this port, so those cases are out of scope here."
   (:require [clojure.test :refer [deftest is testing]]
             [kamado.methods.ingest :as ing]
-            [cheshire.core :as json]))
+            [json.compat :as json]))
 
 (def sample-path "wire/ingest/legacy-oil-refining-export.sample.json")
 (defn- export [] (json/parse-string (slurp sample-path)))
