@@ -10,7 +10,7 @@
 
   The network push (push_batch / urllib) + the live --live gate live only in the Python main
   (G8-gated), omitted from this port; the migration core is pure stdlib, network-free."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 ;; G4: fields that would tie a refinery to a natural person — refused on sight.
 (def PERSON-FIELDS ["owner_person" "ceo" "person" "individual" "operator_person" "crew"])
@@ -20,19 +20,19 @@
 (def UNIT-KINDS #{"cdu" "fcc" "hydrocracker" "coker" "reformer" "hydrotreater" "alkylation"})
 
 (defn- status* [s & [default]]
-  (get STATUS-MAP (str/lower-case (str/trim (str (or s "")))) (or default ":active")))
+  (get STATUS-MAP (str/lower (str/trim (str (or s "")))) (or default ":active")))
 
 (defn- rid* [code]
   (let [code (str code) i (.indexOf code "-")]
     (if (neg? i)
-      (str "rf." (str/lower-case code))
+      (str "rf." (str/lower code))
       (let [cc (subs code 0 i) rest (subs code (inc i))]
         (if (str/blank? rest)
-          (str "rf." (str/lower-case code))
-          (str "rf." (str/lower-case cc) "." (str/replace (str/lower-case rest) "-" "_")))))))
+          (str "rf." (str/lower code))
+          (str "rf." (str/lower cc) "." (str/replace (str/lower rest) "-" "_")))))))
 
 (defn- uid* [code unit-type]
-  (str "u." (-> (rid* code) (subs 3) (str/replace "." "_")) "." (str/lower-case (str unit-type))))
+  (str "u." (-> (rid* code) (subs 3) (str/replace "." "_")) "." (str/lower (str unit-type))))
 
 (defn- lstrip-colon [k] (str/replace (str k) #"^:+" ""))
 
@@ -66,7 +66,7 @@
                 {} (get export "Refinery" []))
         units
         (reduce (fn [m u]
-                  (let [kind (str/lower-case (str (or (get u "unit_type") "")))
+                  (let [kind (str/lower (str (or (get u "unit_type") "")))
                         uid (uid* (get u "refinery_code") kind)]
                     (assoc m uid {":unit/id" uid
                                   ":unit/refinery" (rid* (get u "refinery_code"))
@@ -76,7 +76,7 @@
                 {} (get export "RefineryUnit" []))
         outages
         (reduce (fn [m o]
-                  (let [kind (str/lower-case (str (or (get o "unit_type") "")))
+                  (let [kind (str/lower (str (or (get o "unit_type") "")))
                         as-of (get o "as_of" "")
                         oid (str "o." (-> (rid* (get o "refinery_code")) (subs 3) (str/replace "." "_"))
                                  "." kind "." as-of)]

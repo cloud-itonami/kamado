@@ -21,7 +21,7 @@
   House style: Python ':…' keyword strings stay strings; pure fns; closed-vocab violations
   → ex-info (the Python ValueError edge); round() = HALF_EVEN via exact BigDecimal.(double);
   {:g}/{:+.2f} float formatting matches Python f-strings. Portable .cljc."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 ;; ── physical constants (well-established, public) ────────────────────────────
 ;; A finished liquid hydrocarbon fuel is ~85% carbon by mass; full combustion of

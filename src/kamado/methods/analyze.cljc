@@ -22,7 +22,7 @@
   House style: Python ':…' keyword strings stay strings; pure fns; file I/O at the #?(:clj)
   edge; the embedded EDN reader is shionome's edn.cljc family (same regex tokenizer).
   Byte-parity: `-main` writes the SAME bytes analyze.py writes to out/intel-report.md."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [kamado.methods.carbon-balance :as cb]
             [kamado.methods.feedstock-guard :refer [screen-feedstock screen-intervention]]))
 
