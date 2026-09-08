@@ -7,7 +7,7 @@
   Invariants: G1 closed-loop-carbon-only (fossil-virgin-crude raises BEFORE any synthesis record —
   kamado cannot operate a fossil-fed refinery) · G2/D3 net-atmospheric-carbon Δ ≤ tolerance.
   GuardState dataclass → string-keyed map under \"cell_state\"; ValueError → (throw (ex-info ...))."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (def allowed-feedstock #{"biogenic" "captured-co2" "recycled-carbon" "existing-inventory-decommission"})
 (def allowed-energy #{"hikari-renewable" "grid-mixed"})   ; surface-fidelity constant (unused by run)

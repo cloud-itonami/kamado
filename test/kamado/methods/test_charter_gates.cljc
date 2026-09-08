@@ -19,7 +19,7 @@
   It weakens no gate; it asserts them. The no-server-key invariant is pinned directly here."
   (:require [clojure.test :refer [deftest is run-tests]]
             [clojure.set :as set]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [clojure.edn :as edn]))
 
 #?(:clj
@@ -63,7 +63,7 @@
     (let [e (enum-of (lex n) :feedstockClass)]
       (is (= CLOSED-LOOP-FEEDSTOCK e)
           (str "fossil-prohibition: " n ".feedstockClass must be the closed-loop set, got " e))
-      (is (empty? (filter (fn [v] (some #(str/includes? (str/lower-case v) %) FOSSIL-TOKENS)) e))
+      (is (empty? (filter (fn [v] (some #(str/includes? (str/lower v) %) FOSSIL-TOKENS)) e))
           (str "fossil-prohibition: " n " must not make a virgin/crude/fossil feedstock representable"))))
   (let [p (lex "feedstockProvenance")]
     (is (= true (const-of p :closedLoop)) "feedstock is closed-loop (const true)")

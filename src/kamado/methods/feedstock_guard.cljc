@@ -13,7 +13,7 @@
 
   House style: Python ':…' keyword strings stay strings; pure fns; closed-vocab/gate
   violations → ex-info (the Python ValueError edge). Portable .cljc."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 ;; G1: the ONLY representable feedstock classes. Anything else is a charter violation.
 (def ALLOWED-FEEDSTOCK

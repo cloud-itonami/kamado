@@ -7,7 +7,7 @@
   Run from $W:
     bb --classpath 20-actors -e \"(require 'kamado.methods.test-decommission-robot 'clojure.test) \\
        (clojure.test/run-tests 'kamado.methods.test-decommission-robot)\""
-  (:require [clojure.test :refer [deftest is run-tests]]
+  (:require [kotoba.lang.text] [clojure.test :refer [deftest is run-tests]]
             [kamado.methods.substrate :as sub]
             [kamado.methods.decommission-robot :as dr
              :refer [BENZENE-ENTRY-PPM H2S-ENTRY-PPM plan-cut-entry purge-to-entry to-datoms]]))
@@ -69,7 +69,7 @@
     (is (false? (get plan ":serverHeldKey")))
     (is (true? (get plan ":dryRun")))
     ;; G9: freed hot-zone worker routes to the Basic-High-Income cohort.
-    (is (clojure.string/starts-with? (get plan ":displacementCohortRef") "bhi:"))))
+    (is (kotoba.lang.text/starts-with? (get plan ":displacementCohortRef") "bhi:"))))
 
 ;; ── structural gates ─────────────────────────────────────────────────────────
 
@@ -126,6 +126,6 @@
     (is (false? (get d ":decommission/server-held-key")))
     (is (true? (get d ":decommission/entry-permitted")))
     (is (true? (get d ":decommission/representative")))
-    (is (clojure.string/starts-with? (get d ":decommission/displacement-cohort-ref") "bhi:"))))
+    (is (kotoba.lang.text/starts-with? (get d ":decommission/displacement-cohort-ref") "bhi:"))))
 
 #?(:clj (defn -main [& _] (run-tests 'kamado.methods.test-decommission-robot)))

@@ -8,7 +8,7 @@
   unrepresentable) · G5 no-server-key (member/operator signs; serverHeldKey false) · G8 outward-
   gated (R0 = intent-only dry-run). PlanState dataclass → string-keyed map under \"cell_state\";
   ValueError → (throw (ex-info ...))."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (def allowed-intervention #{"decommission" "remediate" "convert" "monitor"})
 (def allowed-convert #{"hikari-solar" "synthesis-plant" "materials-recovery" "remediated-land" "none"})
