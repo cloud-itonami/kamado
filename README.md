@@ -40,8 +40,8 @@ rows are reached only by changing the **feedstock**. That is the entire design: 
 ## Run
 
 ```sh
-bb test
-bb audit
+kbb -M:test
+kbb -M:audit
 ```
 
 Canonical EDN lives under `data/` and `manifest.edn`; semantic lexicons are

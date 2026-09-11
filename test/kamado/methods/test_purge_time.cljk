@@ -1,4 +1,4 @@
-#!/usr/bin/env bb
+#!/usr/bin/env kbb
 ;; kamado 竈 — tests for the analytical purge-time (entry-wait modelling estimate).
 ;; Run: bb test
 (ns kamado.methods.test-purge-time
