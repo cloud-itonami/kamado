@@ -5,7 +5,7 @@
   (G1) + net≤0 D3 gate tests.
 
   Run from $W:
-    bb --classpath 20-actors -e \"(require 'kamado.methods.test-kamado 'clojure.test) \\
+    kbb --classpath 20-actors -e \"(require 'kamado.methods.test-kamado 'clojure.test) \\
        (clojure.test/run-tests 'kamado.methods.test-kamado)\""
   (:require [clojure.test :refer [deftest is run-tests]]
             [kamado.methods.analyze :as analyze]

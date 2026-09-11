@@ -1,4 +1,4 @@
-#!/usr/bin/env bb
+#!/usr/bin/env kbb
 ;; kamado 竈 — validation of the seed-identity-wins ingest dedup.
 ;; Run: bb test
 (ns kamado.methods.test-dedup

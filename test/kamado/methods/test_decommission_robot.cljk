@@ -5,7 +5,7 @@
   SafetyError crux + the civilian / no-server-key / witness-safety gates.
 
   Run from $W:
-    bb --classpath 20-actors -e \"(require 'kamado.methods.test-decommission-robot 'clojure.test) \\
+    kbb --classpath 20-actors -e \"(require 'kamado.methods.test-decommission-robot 'clojure.test) \\
        (clojure.test/run-tests 'kamado.methods.test-decommission-robot)\""
   (:require [kotoba.lang.text] [clojure.test :refer [deftest is run-tests]]
             [kamado.methods.substrate :as sub]

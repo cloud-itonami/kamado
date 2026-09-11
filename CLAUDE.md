@@ -60,8 +60,8 @@ G11 safety-honesty (not a certified safety system) · G12 no-persistence-launder
 ## Build / test
 
 ```sh
-bb test
-bb audit
+kbb -M:test
+kbb -M:audit
 ```
 
 **Legacy migration** (supersedes `oil-refining`): `src/kamado/methods/ingest.cljk` converts a legacy

@@ -1,4 +1,4 @@
-#!/usr/bin/env bb
+#!/usr/bin/env kbb
 ;; kamado 竈 — structural validation of the carbon mass-balance + the net≤0 (D3) charter gate.
 ;; Run: bb test
 (ns kamado.methods.test-carbon-balance
