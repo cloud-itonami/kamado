@@ -11,7 +11,7 @@ construction.
 
 ## Why a robotics-controlled fossil refinery is still a multi-generational harm
 
-`src/kamado/methods/carbon_balance.cljc` is the whole argument as arithmetic (tCO₂e per tonne of product):
+`src/kamado/methods/carbon_balance.cljk` is the whole argument as arithmetic (tCO₂e per tonne of product):
 
 | pathway | origin | process | fate | **NET** | D3? |
 |---|---:|---:|---:|---:|:---:|
@@ -29,7 +29,7 @@ rows are reached only by changing the **feedstock**. That is the entire design: 
 
 ## Three faces
 
-- **A. observation** (`asset_observation` + `src/kamado/methods/analyze.cljc`) — kotoba-native successor to the
+- **A. observation** (`asset_observation` + `src/kamado/methods/analyze.cljk`) — kotoba-native successor to the
   legacy `oil-refining` Cypher actor. Refinery/unit/outage registry + transition-readiness. A
   resilience + transition map, **never** a target-list (G4).
 - **B. decommission/transition** (`decommission_plan`) — §2(d) robotics to wind down / remediate /

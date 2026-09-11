@@ -6,7 +6,7 @@
 
   NOTE on the ns name: the Python file is `_substrate.py`, but a leading-underscore
   Clojure namespace munges badly under SCI/the JVM classloader, so we pick the clean
-  ns `kamado.methods.substrate`, resolving to `src/kamado/methods/substrate.cljc`,
+  ns `kamado.methods.substrate`, resolving to `src/kamado/methods/substrate.cljk`,
   and the siblings `(:require [kamado.methods.substrate :as sub])` — mirrors
   hikari/mizuho substrate.cljc.
 
