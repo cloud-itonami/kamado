@@ -8,7 +8,7 @@
   that let a migrated row OVERWRITE a seed row (losing curated seed data) or mis-counted the
   additions would silently corrupt the merged graph or its provenance count."
   (:require [kamado.methods.ingest :as i]
-            [clojure.test :refer [deftest is run-tests]]))
+            [kotoba.test :refer [deftest is run-tests]]))
 
 (deftest seed-identity-wins-over-a-colliding-migrated-row
   ;; a migrated id already present in the seed is NOT overwritten and is NOT counted as added

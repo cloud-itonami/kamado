@@ -7,7 +7,7 @@
   Run from $W:
     kbb --classpath 20-actors -e \"(require 'kamado.methods.test-kamado 'clojure.test) \\
        (clojure.test/run-tests 'kamado.methods.test-kamado)\""
-  (:require [clojure.test :refer [deftest is run-tests]]
+  (:require [kotoba.test :refer [deftest is run-tests]]
             [kamado.methods.analyze :as analyze]
             [kamado.methods.carbon-balance :as cb]
             [kamado.methods.feedstock-guard :as fg

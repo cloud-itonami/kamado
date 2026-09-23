@@ -17,7 +17,7 @@
     decommission-not-operate — interventions are {decommission, remediate, convert, monitor}
 
   It weakens no gate; it asserts them. The no-server-key invariant is pinned directly here."
-  (:require [clojure.test :refer [deftest is run-tests]]
+  (:require [kotoba.test :refer [deftest is run-tests]]
             [clojure.set :as set]
             [kotoba.lang.text :as str]
             [kotoba.lang.edn :as edn]))

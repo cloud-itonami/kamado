@@ -1,7 +1,7 @@
 (ns kamado.cells.synthesis-control.test-state-machine
   "Tests for kamado synthesis_control state machine (ADR-2606051500).
   R0 scaffold: verifies the cell raises correctly before Council activation."
-  (:require [clojure.test :refer [deftest is]]
+  (:require [kotoba.test :refer [deftest is]]
             [kamado.cells.synthesis-control.state-machine :as sm]))
 
 (deftest solve-raises-r0-scaffold
