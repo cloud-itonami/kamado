@@ -1,7 +1,7 @@
 (ns kamado.cells.transition-bridge.test-state-machine
   "Tests for kamado transition_bridge state machine (ADR-2606051500).
   R0 scaffold: verifies routes table is correct + solve raises before activation."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [kamado.cells.transition-bridge.state-machine :as sm]))
 
 (deftest solve-raises-r0-scaffold

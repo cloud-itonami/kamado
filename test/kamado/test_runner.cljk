@@ -1,5 +1,5 @@
 (ns kamado.test-runner
-  (:require [clojure.test :as t]
+  (:require [kotoba.test :as t]
             [kamado.murakumo-test]
             [kamado.methods.test-carbon-balance]
             [kamado.methods.test-charter-gates]

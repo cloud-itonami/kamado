@@ -3,7 +3,7 @@
   Drives init → purged → cut_planned → entry_committed and pins every gate: the ENTRY
   GATE (cut requires a completed purge), N1/G3 civilian-use, G5/G7 no-server-key, G8
   witness quorum ≥2. Plus LIVE py↔clj deep parity on the committed record."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [kamado.cells.decommission-robot.state-machine :as sm]))
 
 (def ^:private happy

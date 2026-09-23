@@ -7,7 +7,7 @@
   UNVENTABLE (nil) refuse-signal when the leak overwhelms the purge. A modelling estimate, never a
   certified clearance (G11)."
   (:require [kamado.methods.decommission-robot :as d]
-            [clojure.test :refer [deftest is run-tests]]))
+            [kotoba.test :refer [deftest is run-tests]]))
 
 (deftest is-the-linear-dilution-time
   (is (< (Math/abs (- (/ (- 100.0 10.0) (- (* 0.5 10.0) 0.1))

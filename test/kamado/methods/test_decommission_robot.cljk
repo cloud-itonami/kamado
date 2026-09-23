@@ -7,7 +7,7 @@
   Run from $W:
     kbb --classpath 20-actors -e \"(require 'kamado.methods.test-decommission-robot 'clojure.test) \\
        (clojure.test/run-tests 'kamado.methods.test-decommission-robot)\""
-  (:require [kotoba.lang.text] [clojure.test :refer [deftest is run-tests]]
+  (:require [kotoba.lang.text] [kotoba.test :refer [deftest is run-tests]]
             [kamado.methods.substrate :as sub]
             [kamado.methods.decommission-robot :as dr
              :refer [BENZENE-ENTRY-PPM H2S-ENTRY-PPM plan-cut-entry purge-to-entry to-datoms]]))

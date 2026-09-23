@@ -3,7 +3,7 @@
   Drives init → screened → balanced → admitted; pins the G1 fossil-feedstock refusal (the third
   enforcement point), unknown-fate refusal, screen-before-balance ordering, the carbon-balance Δ
   (parity-pinned to Python across feedstock/energy/fate combos), and the G2/D3 admittance gate."
-  (:require [clojure.test :refer [deftest is]]
+  (:require [kotoba.test :refer [deftest is]]
             [kamado.cells.feedstock-guard.state-machine :as sm]))
 
 (defn- balance [fs en ft]

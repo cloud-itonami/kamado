@@ -8,7 +8,7 @@
   :representative discipline, and the kg.ingest contract shape. The Python test's push/--live
   cases drive push_batch + main's urllib/operator gate (G8) — that network leg is not part of
   this port, so those cases are out of scope here."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [kamado.methods.ingest :as ing]
             [json.compat :as json]))
 

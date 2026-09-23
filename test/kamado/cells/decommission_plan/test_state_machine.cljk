@@ -4,7 +4,7 @@
   life-extension refused), unknown convert target refused, phase ordering (plan-before-scope /
   gate-before-plan), G5 principal allow-list + serverHeldKey-false, and the G8 intent-only gated
   payload."
-  (:require [clojure.test :refer [deftest is]]
+  (:require [kotoba.test :refer [deftest is]]
             [kamado.cells.decommission-plan.state-machine :as sm]))
 
 (deftest test-full-progression
