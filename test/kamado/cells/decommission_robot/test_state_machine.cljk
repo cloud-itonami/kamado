@@ -3,7 +3,7 @@
   Drives init → purged → cut_planned → entry_committed and pins every gate: the ENTRY
   GATE (cut requires a completed purge), N1/G3 civilian-use, G5/G7 no-server-key, G8
   witness quorum ≥2. Plus LIVE py↔clj deep parity on the committed record."
-  (:require [kotoba.test :refer [deftest is testing]]
+  (:require [kotoba.lang.error :as kerror] [kotoba.test :refer [deftest is testing]]
             [kamado.cells.decommission-robot.state-machine :as sm]))
 
 (def ^:private happy
@@ -34,18 +34,18 @@
 
 (deftest gates-refuse
   ;; ENTRY GATE: plan_cut before a completed purge
-  (is (thrown? clojure.lang.ExceptionInfo (sm/transition-plan-cut {"cell_state" {"phase" "init"}})))
+  (is (thrown? kerror/ExceptionInfo (sm/transition-plan-cut {"cell_state" {"phase" "init"}})))
   ;; commit before a planned cut
-  (is (thrown? clojure.lang.ExceptionInfo (sm/transition-commit-entry {"cell_state" {"phase" "purged"}})))
+  (is (thrown? kerror/ExceptionInfo (sm/transition-commit-entry {"cell_state" {"phase" "purged"}})))
   ;; N1/G3: a fossil life-extension / non-civilian use is refused in the purge core
-  (is (thrown? clojure.lang.ExceptionInfo (sm/transition-purge (assoc happy "use" "restart-fossil"))))
+  (is (thrown? kerror/ExceptionInfo (sm/transition-purge (assoc happy "use" "restart-fossil"))))
   ;; G5/G7: a server signature is refused at the cut-plan gate
-  (is (thrown? clojure.lang.ExceptionInfo
+  (is (thrown? kerror/ExceptionInfo
                (-> (sm/transition-purge happy)
                    (merge happy {"server_sig" "S"})
                    sm/transition-plan-cut)))
   ;; G5/G7: a member signature is required
-  (is (thrown? clojure.lang.ExceptionInfo
+  (is (thrown? kerror/ExceptionInfo
                (-> (sm/transition-purge happy)
                    (merge (dissoc happy "member_sig") {"member_sig" ""})
                    sm/transition-plan-cut))))

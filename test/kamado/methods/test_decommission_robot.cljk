@@ -7,7 +7,7 @@
   Run from $W:
     kbb --classpath 20-actors -e \"(require 'kamado.methods.test-decommission-robot 'clojure.test) \\
        (clojure.test/run-tests 'kamado.methods.test-decommission-robot)\""
-  (:require [kotoba.lang.text] [kotoba.test :refer [deftest is run-tests]]
+  (:require [kotoba.lang.error :as kerror] [kotoba.lang.text] [kotoba.test :refer [deftest is run-tests]]
             [kamado.methods.substrate :as sub]
             [kamado.methods.decommission-robot :as dr
              :refer [BENZENE-ENTRY-PPM H2S-ENTRY-PPM plan-cut-entry purge-to-entry to-datoms]]))
@@ -43,7 +43,7 @@
 
 (deftest test-entry-refused-when-concentration-above-limit
   ;; Robot must NOT enter an un-purged zone — structural SafetyError, not a warning.
-  (is (thrown-with-msg? clojure.lang.ExceptionInfo #"ENTRY REFUSED"
+  (is (thrown-with-msg? kerror/ExceptionInfo #"ENTRY REFUSED"
                         (plan-cut-entry :target-xy [1.5 0.4]
                                         :final-ppm 50.0
                                         :gas-limit H2S-ENTRY-PPM
@@ -54,7 +54,7 @@
        (try (plan-cut-entry :target-xy [1.5 0.4] :final-ppm 50.0 :gas-limit H2S-ENTRY-PPM
                             :member-sig "m:ed25519:demo" :witness-sigs WITNESS)
             nil
-            (catch clojure.lang.ExceptionInfo e e)))))
+            (catch kerror/ExceptionInfo e e)))))
 
 (deftest test-cut-plan-reachable-and-safe-when-purged
   (let [plan (plan-cut-entry :target-xy [1.5 0.4]
@@ -78,7 +78,7 @@
     (is (sub/safety-error?
          (try (purge-to-entry :gas "H2S" :target-ppm H2S-ENTRY-PPM :use use)
               nil
-              (catch clojure.lang.ExceptionInfo e e)))
+              (catch kerror/ExceptionInfo e e)))
         (str "use " use " must be refused"))))
 
 (deftest test-fossil-life-extension-use-refused
@@ -89,7 +89,7 @@
          (try (plan-cut-entry :target-xy [1.5 0.4] :final-ppm 8.0 :gas-limit H2S-ENTRY-PPM
                               :member-sig "m:sig" :witness-sigs WITNESS :use use)
               nil
-              (catch clojure.lang.ExceptionInfo e e)))
+              (catch kerror/ExceptionInfo e e)))
         (str "use " use " must be refused"))))
 
 (deftest test-server-signature-refused
@@ -99,14 +99,14 @@
        (try (plan-cut-entry :target-xy [1.5 0.4] :final-ppm 8.0 :gas-limit H2S-ENTRY-PPM
                             :member-sig "m:sig" :witness-sigs WITNESS :server-sig "s:sig")
             nil
-            (catch clojure.lang.ExceptionInfo e e)))))
+            (catch kerror/ExceptionInfo e e)))))
 
 (deftest test-missing-member-signature-refused
   (is (sub/safety-error?
        (try (plan-cut-entry :target-xy [1.5 0.4] :final-ppm 8.0 :gas-limit H2S-ENTRY-PPM
                             :member-sig "" :witness-sigs WITNESS)
             nil
-            (catch clojure.lang.ExceptionInfo e e)))))
+            (catch kerror/ExceptionInfo e e)))))
 
 (deftest test-witness-below-quorum-recorded-not-raised
   ;; G8 quorum miss is a Council-escalation record, not a raise (mirrors hikari).

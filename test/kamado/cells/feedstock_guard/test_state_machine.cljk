@@ -3,7 +3,7 @@
   Drives init → screened → balanced → admitted; pins the G1 fossil-feedstock refusal (the third
   enforcement point), unknown-fate refusal, screen-before-balance ordering, the carbon-balance Δ
   (parity-pinned to Python across feedstock/energy/fate combos), and the G2/D3 admittance gate."
-  (:require [kotoba.test :refer [deftest is]]
+  (:require [kotoba.lang.error :as kerror] [kotoba.test :refer [deftest is]]
             [kamado.cells.feedstock-guard.state-machine :as sm]))
 
 (defn- balance [fs en ft]
@@ -27,20 +27,20 @@
       (is (= true (get p "passesD3"))))))
 
 (deftest test-g1-fossil-refused
-  (is (thrown-with-msg? clojure.lang.ExceptionInfo #"G1 violation"
+  (is (thrown-with-msg? kerror/ExceptionInfo #"G1 violation"
                         (sm/transition-to-screened {"cell_state" {} "feedstock" ":fossil-virgin-crude"})))
-  (is (thrown-with-msg? clojure.lang.ExceptionInfo #"G1 violation"
+  (is (thrown-with-msg? kerror/ExceptionInfo #"G1 violation"
                         (sm/transition-to-screened {"cell_state" {} "feedstock" "crude-oil"})))
   ;; all four closed-loop feedstocks screen cleanly
   (doseq [fs ["biogenic" "captured-co2" "recycled-carbon" "existing-inventory-decommission"]]
     (is (= "screened" (get-in (sm/transition-to-screened {"cell_state" {} "feedstock" fs}) ["cell_state" "phase"])) fs)))
 
 (deftest test-unknown-fate-refused
-  (is (thrown-with-msg? clojure.lang.ExceptionInfo #"unknown product fate"
+  (is (thrown-with-msg? kerror/ExceptionInfo #"unknown product fate"
                         (sm/transition-to-screened {"cell_state" {} "feedstock" "biogenic" "fate" "landfill"}))))
 
 (deftest test-balance-requires-screen
-  (is (thrown-with-msg? clojure.lang.ExceptionInfo #"requires a passed feedstock screen first"
+  (is (thrown-with-msg? kerror/ExceptionInfo #"requires a passed feedstock screen first"
                         (sm/transition-to-balanced {"cell_state" {}}))))
 
 (deftest test-carbon-balance-parity
@@ -55,4 +55,4 @@
   (let [s2 (-> {"cell_state" {} "feedstock" "recycled-carbon" "energy" "grid-mixed" "fate" "combusted-fuel"}
                sm/transition-to-screened sm/transition-to-balanced)]
     (is (= false (get-in s2 ["cell_state" "passes_d3"])))
-    (is (thrown-with-msg? clojure.lang.ExceptionInfo #"G2 violation" (sm/transition-to-admitted s2)))))
+    (is (thrown-with-msg? kerror/ExceptionInfo #"G2 violation" (sm/transition-to-admitted s2)))))
