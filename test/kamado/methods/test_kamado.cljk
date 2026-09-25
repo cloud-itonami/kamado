@@ -7,7 +7,7 @@
   Run from $W:
     kbb --classpath 20-actors -e \"(require 'kamado.methods.test-kamado 'clojure.test) \\
        (clojure.test/run-tests 'kamado.methods.test-kamado)\""
-  (:require [kotoba.test :refer [deftest is run-tests]]
+  (:require [kotoba.lang.error :as kerror] [kotoba.test :refer [deftest is run-tests]]
             [kamado.methods.analyze :as analyze]
             [kamado.methods.carbon-balance :as cb]
             [kamado.methods.feedstock-guard :as fg
@@ -45,7 +45,7 @@
 
 ;; ── feedstock_guard: G1 / G3 structural invariants ────────────────────────────
 (deftest test-g1-fossil-virgin-crude-is-not-representable
-  (is (thrown-with-msg? clojure.lang.ExceptionInfo #"G1 violation"
+  (is (thrown-with-msg? kerror/ExceptionInfo #"G1 violation"
                         (screen-feedstock ":fossil-virgin-crude" "test"))))
 
 (deftest test-g1-allows-only-closed-loop-carbon
@@ -54,7 +54,7 @@
 
 (deftest test-g3-refuses-fossil-life-extension
   (doseq [bad [":expand" ":restart-fossil" ":revamp-throughput"]]
-    (is (thrown-with-msg? clojure.lang.ExceptionInfo #"G3 violation"
+    (is (thrown-with-msg? kerror/ExceptionInfo #"G3 violation"
                           (screen-intervention bad "test"))))
   (doseq [ok [":decommission" ":convert" ":remediate" ":monitor"]]
     (is (= (screen-intervention ok) ok))))

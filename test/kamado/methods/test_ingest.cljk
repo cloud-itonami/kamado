@@ -8,7 +8,7 @@
   :representative discipline, and the kg.ingest contract shape. The Python test's push/--live
   cases drive push_batch + main's urllib/operator gate (G8) — that network leg is not part of
   this port, so those cases are out of scope here."
-  (:require [kotoba.test :refer [deftest is testing]]
+  (:require [kotoba.lang.error :as kerror] [kotoba.test :refer [deftest is testing]]
             [kamado.methods.ingest :as ing]
             [json.compat :as json]))
 
@@ -30,12 +30,12 @@
       (is (= ":representative" (get r ":refinery/sourcing"))))))        ; G7 migrated, not authoritative
 
 (deftest g4-refuses-a-person-field
-  (is (thrown-with-msg? clojure.lang.ExceptionInfo #"G4 violation"
+  (is (thrown-with-msg? kerror/ExceptionInfo #"G4 violation"
                         (ing/migrate {"Refinery" [{"refinery_code" "X-1" "country_code" "JP"
                                                    "owner_person" "山田太郎"}]}))))
 
 (deftest g4-refuses-non-org-operator
-  (is (thrown-with-msg? clojure.lang.ExceptionInfo #"G4 violation"
+  (is (thrown-with-msg? kerror/ExceptionInfo #"G4 violation"
                         (ing/migrate {"Refinery" [{"refinery_code" "X-1" "country_code" "JP"
                                                    "operator_org" "alice"}]}))))
 
